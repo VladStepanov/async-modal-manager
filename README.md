@@ -1,5 +1,12 @@
 # async-modals
 
+## API
+```javascript
+this.$modal.show('modalName')
+    .then(modalName => console.log('User accepted modal'))
+    .catch(modalName => console.log('User refused modal'))
+```
+
 ## Project setup
 ```
 yarn install
