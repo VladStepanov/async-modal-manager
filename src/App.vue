@@ -1,17 +1,38 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Modal name="about">
+      <AboutModal />
+    </Modal>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Modal from './components/Modal'
+import AboutModal from './components/AboutModal'
+import { show } from './plugins/modal'
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  components: { Modal, AboutModal },
+  mounted () {
+    window.addEventListener('click', this.showModal)
+  },
+  destroyed () {
+    window.removeEventListener('click', this.showModal)
+  },
+  methods: {
+    // showModal (e) {
+    //   e.stopPropagation()
+    //   this.$modal.show('about')
+    //     .then((modalName) => console.log('user accepted modal', modalName))
+    //     .catch((modalName) => console.log('user refused modal', modalName))
+    // },
+    showModal (e) {
+      e.stopPropagation()
+      show('about')
+        .then(modalName => console.log('User accepted modal', modalName))
+        .catch(modalName => console.log('user refused modal', modalName))
+    }
   }
 }
 </script>
